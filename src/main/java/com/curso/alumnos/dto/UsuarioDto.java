@@ -4,6 +4,8 @@ public class UsuarioDto {
 
 	private String nombre;
 	
+	private String password;
+	
 	private String usuario;
 	
 	private String apellido1;
@@ -61,5 +63,15 @@ public class UsuarioDto {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 
 }

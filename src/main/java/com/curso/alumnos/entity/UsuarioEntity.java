@@ -1,9 +1,7 @@
 package com.curso.alumnos.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +36,7 @@ public class UsuarioEntity {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="rol_id")
 	private RolEntity rol;
 	

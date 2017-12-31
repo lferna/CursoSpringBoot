@@ -14,40 +14,62 @@
 	<div class="container">
 	
 	<img th:src="@{/images/logo.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-	<nav class="navbar navbar-inverse bg-inverse">
-  		<div class="container-fluid">    		
-    	<ul class="nav navbar-nav">
-	      <li class="active"><a href="#">Home</a></li>
-	      <li><a href="#">Listado de alumnos</a></li>
-	      <li><a href="#">Listado de profesores</a></li>
-	      <li><a href="#">Listado de asignaturas</a></li>
-	      <li><a href="admin/newUser" th:action="@{/logout}">Nuevo usuario</a></li>
-	      <li><a href="#">Nuevo asignatura</a></li>
-	      <li><form th:action="@{/logout}" method="POST">
-			 <button class="btn btn-danger navbar-btn">Desconectar</button>
-		  </form>
-		  </li>   
-	      
-    	</ul>  	
-  		</div>
-	</nav>
+	<form th:action="@{/admin/menu}" method="GET">	
+		<nav class="navbar navbar-inverse bg-inverse">
+	  		<div class="container-fluid">    		
+	    	<ul class="nav navbar-nav">
+	          <li class="navbar-btn"><span style="color:white;" >Bienvenido <span th:text="${#authentication.name}"></span></span></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="home">Inicio</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListStudent">Listado de alumnos</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListTeacher">Listado de profesores</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListSubject">Listado de asignaturas</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewNewUser">Nuevo usuario</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewNewSubject">Nueva asignatura</button></li>
+		      <li><form th:action="@{/logout}" method="POST">
+				 <button class="btn btn-danger">Desconectar</button>
+			  </form>
+			  </li>   
+		      
+	    	</ul>  	
+	  		</div>
+		</nav>
+	</form>
+
 		<!-- Formulario de alta -->
-		<form>
+		<form th:action="@{/admin/createNewUser}" th:object="${usuarioDto}" method="POST">
 		  <div class="form-group">
-		    <label for="exampleInputEmail1">Email address</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-		     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		    <label for="usuario">Usuario</label>
+		    <input type="text" class="form-control" th:field="*{usuario}" placeholder="Introduzca el usuario"/>
 		  </div>
 		  <div class="form-group">
-		    <label for="exampleInputPassword1">Password</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
+		    <label for="password">Password</label>
+		    <input type="password" class="form-control" th:field="*{password}" placeholder="Introduzca la password"/>
 		  </div>
-		  <div class="form-check">
-		    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-		    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+		  <div class="form-group">
+		    <label for="nombre">Nombre</label>
+		    <input type="text" class="form-control" th:field="*{nombre}" placeholder="Introduzca el nombre"/>
 		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+		  <div class="form-group">
+		    <label for="apellido1">Primer Apellido</label>
+		    <input type="text" class="form-control" th:field="*{apellido2}" placeholder="Introduzca el primer apellido"/>
+		  </div>
+		  <div class="form-group">
+		    <label for="apellido2">Primer Apellido</label>
+		    <input type="text" class="form-control" th:field="*{apellido1}" placeholder="Introduzca el segundo apellido"/>
+		  </div>
+		  <div class="form-group">
+		    <label for="email">Email</label>
+		    <input type="text" class="form-control" th:field="*{email}" aria-describedby="emailHelp" placeholder="Introduzca el email"/>
+		     <small id="emailHelp" class="form-text text-muted">No compartiremos tu email con nadie.</small>
+		  </div>
+		   <div class="form-group">
+		    <label for="email">Rol</label>
+		    <select class="form-control" id="roles"  th:field="*{rol.id}">
+    			<option th:each="rol : ${listRoles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
+    		</select>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Enviar</button>
+	   </form>
 		
 	</div>
 </body>

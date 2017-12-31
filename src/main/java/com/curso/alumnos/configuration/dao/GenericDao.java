@@ -9,5 +9,5 @@ public abstract class GenericDao {
 	protected EntityManager entityManager;
 	
 	protected Class entityClass;
-	
+
 }
