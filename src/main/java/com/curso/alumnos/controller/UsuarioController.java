@@ -21,5 +21,43 @@ public class UsuarioController {
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/home");
 		return modelAndView;
-}
+	}
+	
+	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewNewUser")
+	public ModelAndView viewNewUser(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/viewNewUser");
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewNewSubject")
+	public ModelAndView viewNewSubject(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/viewNewSubject");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListStudent")
+	public ModelAndView viewListStudent(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/viewListStudent");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListTeacher")
+	public ModelAndView viewListTeacher(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/viewListTeacher");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListSubject")
+	public ModelAndView viewListSubject(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/viewListSubject");
+		return modelAndView;
+	}
+	
+	
 }

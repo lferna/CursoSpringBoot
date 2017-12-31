@@ -1,16 +1,17 @@
 package com.curso.alumnos.dao;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.curso.alumnos.entity.UsuarioEntity;
 
 
-@Repository("usuarioRepository")
-public interface UsuarioDao extends CrudRepository<UsuarioEntity,Long>, UsuarioRepositoryCustom{
+@Repository
+public interface UsuarioDao extends CrudRepository<UsuarioEntity,Long>{
 	
-	UsuarioEntity findByName(String nombre);/*
+	UsuarioEntity findByNombre(String nombre);
 	
-	//@Query("select u from UsuarioEntity u where u.usuario = ?1")
-	UsuarioEntity findByUsername(String username);*/
+	UsuarioEntity findByUsuario(String username);
 }

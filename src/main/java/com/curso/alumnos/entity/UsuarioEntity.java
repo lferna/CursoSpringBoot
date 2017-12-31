@@ -3,6 +3,7 @@ package com.curso.alumnos.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,9 +38,9 @@ public class UsuarioEntity {
 	@Column(name = "email")
 	private String email;
 
-	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="rol")
-	@JoinColumn(name="rol_id")*/
-	private String rol;
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="rol_id")
+	private RolEntity rol;
 	
 	public Long getId() {
 		return id;
@@ -81,11 +82,11 @@ public class UsuarioEntity {
 		this.email = email;
 	}
 
-	public String getRol() {
+	public RolEntity getRol() {
 		return rol;
 	}
 
-	public void setRol(String rol) {
+	public void setRol(RolEntity rol) {
 		this.rol = rol;
 	}
 
