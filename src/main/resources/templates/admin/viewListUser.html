@@ -36,42 +36,28 @@
 		</nav>
 	</form>
 
-		<!-- Formulario de alta -->
-		<form th:action="@{/admin/createNewUser}" th:object="${usuarioDto}" method="POST">
-		  <div class="form-group">
-		    <label for="usuario">Usuario</label>
-		    <input type="text" class="form-control" th:field="*{usuario}" placeholder="Introduzca el usuario"/>
-		  </div>
-		  <div class="form-group">
-		    <label for="password">Password</label>
-		    <input type="password" class="form-control" th:field="*{password}" placeholder="Introduzca la password"/>
-		  </div>
-		  <div class="form-group">
-		    <label for="nombre">Nombre</label>
-		    <input type="text" class="form-control" th:field="*{nombre}" placeholder="Introduzca el nombre"/>
-		  </div>
-		  <div class="form-group">
-		    <label for="apellido1">Primer Apellido</label>
-		    <input type="text" class="form-control" th:field="*{apellido2}" placeholder="Introduzca el primer apellido"/>
-		  </div>
-		  <div class="form-group">
-		    <label for="apellido2">Primer Apellido</label>
-		    <input type="text" class="form-control" th:field="*{apellido1}" placeholder="Introduzca el segundo apellido"/>
-		  </div>
-		  <div class="form-group">
-		    <label for="email">Email</label>
-		    <input type="text" class="form-control" th:field="*{email}" aria-describedby="emailHelp" placeholder="Introduzca el email"/>
-		     <small id="emailHelp" class="form-text text-muted">No compartiremos tu email con nadie.</small>
-		  </div>
-		   <div class="form-group">
-		    <label for="email">Rol</label>
-		    <select class="form-control" id="roles"  th:field="*{rol.id}">
-    			<option th:each="rol : ${listRoles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
-    		</select>
-		  </div>
-		  <button type="submit" class="btn btn-primary">Enviar</button>
-	   </form>
 		
+	<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Usuario</th>
+		      <th scope="col">Nombre</th>
+		      <th scope="col">Apellido1</th>
+		      <th scope="col">Apellido2</th>
+		      <th scope="col">Email</th>
+		    </tr>
+		  </thead>
+		  <tbody th:each="user : ${listUsers}">
+		    <tr>
+		      <td th:text="${user.usuario}"></td>
+		      <td th:text="${user.nombre}"></td>
+		      <td th:text="${user.apellido1}"></td>
+		      <td th:text="${user.apellido2}"></td>
+		      <td th:text="${user.email}"></td>
+		    </tr>		    
+		  </tbody>
+	</table>
+
 	</div>
 </body>
 </html>

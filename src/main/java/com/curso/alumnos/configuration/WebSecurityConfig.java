@@ -3,6 +3,7 @@ package com.curso.alumnos.configuration;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,23 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@Autowired
 	private DataSource dataSource;
-	
-	/*@Value("${spring.queries.users-query}")
-	private String usersQuery;
-	
-	@Value("${spring.queries.roles-query}")
-	private String rolesQuery;
-	*/
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -36,18 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth)
 			throws Exception {
-		auth.userDetailsService(userDetailsService);
-		/*auth.
-			jdbcAuthentication()
-				.usersByUsernameQuery(usersQuery)
-				.authoritiesByUsernameQuery(rolesQuery)
-				.dataSource(dataSource)
-				.passwordEncoder(bCryptPasswordEncoder);*/
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+		BCryptPasswordEncoder encoder = passwordEncoder();
 		http
 		 .authorizeRequests()
 		 .antMatchers("/resources/**").permitAll()
@@ -55,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 .and()
 		 .formLogin()
 		 .usernameParameter("email")
-		 .passwordParameter("password")
+		 .passwordParameter("password")		 
 		 .loginProcessingUrl("/j_spring_security_check") // Submit URL
 		 .loginPage("/login").failureUrl("/login?error=true")
 		 .defaultSuccessUrl("/admin/home")
@@ -72,5 +58,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
 
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder;
+	}
 
 }

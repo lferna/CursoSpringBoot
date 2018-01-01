@@ -12,29 +12,33 @@
 
 <body>
 	<div class="container">
-	
+	<span sec:authentication="principal.authorities"></span>
 	<img th:src="@{/images/logo.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
+	<div class="menu">
+	<div class="menu_list">
 	<form th:action="@{/admin/menu}" method="GET">	
-		<nav class="navbar navbar-inverse bg-inverse">
+		<nav class="navbar-inverse bg-inverse">
 	  		<div class="container-fluid">    		
 	    	<ul class="nav navbar-nav">
 	          <li class="navbar-btn"><span style="color:white;" >Bienvenido <span th:text="${#authentication.name}"></span></span></li>
 		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="home">Inicio</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListStudent">Listado de alumnos</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListTeacher">Listado de profesores</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListSubject">Listado de asignaturas</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListStudent">Alumnos</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListTeacher">Profesores</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListAdmin">Administradores</button></li>
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListSubject">Asignaturas</button></li>
 		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewNewUser">Nuevo usuario</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewNewSubject">Nueva asignatura</button></li>
-		      <li><form th:action="@{/logout}" method="POST">
-				 <button class="btn btn-danger">Desconectar</button>
-			  </form>
-			  </li>   
-		      
+		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewNewSubject">Nueva asignatura</button></li>	   
 	    	</ul>  	
 	  		</div>
 		</nav>
 	</form>
-	 	
+	</div>
+	<div>
+	<form th:action="@{/logout}" method="POST">
+		 <button class="btn btn-danger">Desconectar</button>
+	</form>
+	</div>
+	</div>
 		<div class="panel-group">
 			<div class="panel panel-primary">
 				<div class="panel-heading">

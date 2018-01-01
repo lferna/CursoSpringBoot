@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,9 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		 UsuarioEntity usuarioEntity = usuarioDao.findByUsuario(username);
 		 Set<GrantedAuthority> grantedAuthorities = new HashSet();
-		 /*for (Rol role : user.getRoles()){
-		 grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-		 }*/
+		 grantedAuthorities.add(new SimpleGrantedAuthority(usuarioEntity.getRol().getNombre()));
 		 
 		User user = new User(usuarioEntity.getUsuario(),usuarioEntity.getPassword(), grantedAuthorities);
 		

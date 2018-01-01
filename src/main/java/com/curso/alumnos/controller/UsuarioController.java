@@ -56,17 +56,30 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListAdmin")
+	public ModelAndView viewListAdmin(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/viewListUser");
+		//obtenemos los usuarios que sean del tipo estudiante
+		modelAndView.addObject("listUsers",usuarioService.getUsuarios(1L));
+		return modelAndView;
+	}
+	
 	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListStudent")
 	public ModelAndView viewListStudent(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/viewListStudent");
+		modelAndView.setViewName("admin/viewListUser");
+		//obtenemos los usuarios que sean del tipo estudiante
+		modelAndView.addObject("listUsers",usuarioService.getUsuarios(2L));
 		return modelAndView;
 	}
 	
 	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListTeacher")
 	public ModelAndView viewListTeacher(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/viewListTeacher");
+		//obtenemos los usuarios que sean del tipo profesor
+		modelAndView.addObject("listUsers",usuarioService.getUsuarios(3L));
+		modelAndView.setViewName("admin/viewListUser");
 		return modelAndView;
 	}
 	

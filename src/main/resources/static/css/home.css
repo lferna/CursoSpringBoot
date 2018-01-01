@@ -1,0 +1,10 @@
+
+.menu {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.menu_list {
+    float: left;
+    width: 80%;
+}
