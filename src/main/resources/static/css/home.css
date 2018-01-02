@@ -6,5 +6,23 @@
 
 .menu_list {
     float: left;
-    width: 80%;
+    width: 1034px;
+}
+
+.panel-group-home {
+    margin-bottom: 23px;
+    margin-top: 34px;
+}
+
+.logout{
+	float:right;
+}
+
+.botonera{
+	float:right;
+}
+
+.form-group-usuario {
+    margin-bottom: 15px;
+    margin-top:40px;
 }

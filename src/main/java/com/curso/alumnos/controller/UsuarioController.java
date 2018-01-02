@@ -1,11 +1,14 @@
 package com.curso.alumnos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.curso.alumnos.dto.UsuarioDto;
@@ -28,15 +31,15 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
+	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("admin/home");
+		modelAndView.setViewName("home");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewNewUser")
+	@RequestMapping(value="/alumno/viewNewUser", method = RequestMethod.GET)
 	public ModelAndView viewNewUser(){
 		UsuarioDto usuarioDto = new UsuarioDto();
 		
@@ -49,14 +52,14 @@ public class UsuarioController {
 	}
 	
 	
-	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewNewSubject")
+	@RequestMapping(value="/profesor/viewNewSubject", method = RequestMethod.GET)
 	public ModelAndView viewNewSubject(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewNewSubject");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListAdmin")
+	@RequestMapping(value="/admin/viewListAdmin", method = RequestMethod.GET)
 	public ModelAndView viewListAdmin(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewListUser");
@@ -65,7 +68,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListStudent")
+	@RequestMapping(value="/alumno/viewListStudent", method = RequestMethod.GET)
 	public ModelAndView viewListStudent(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewListUser");
@@ -74,7 +77,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListTeacher")
+	@RequestMapping(value="/profesor/viewListTeacher", method = RequestMethod.GET)
 	public ModelAndView viewListTeacher(){
 		ModelAndView modelAndView = new ModelAndView();
 		//obtenemos los usuarios que sean del tipo profesor
@@ -83,7 +86,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/menu", method = RequestMethod.GET,  params="action=viewListSubject")
+	@RequestMapping(value="/profesor/viewListSubject", method = RequestMethod.GET)
 	public ModelAndView viewListSubject(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewListSubject");
@@ -91,13 +94,27 @@ public class UsuarioController {
 	}
 	
 
-	@RequestMapping(value="/admin/createNewUser", method = RequestMethod.POST)
+	@RequestMapping(value="/alumno/createNewUser", method = RequestMethod.POST)
 	public ModelAndView saveNewUser(@ModelAttribute UsuarioDto usuarioDto,BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
 		usuarioService.saveUser(usuarioDto);
 		modelAndView.setViewName("admin/viewNewUser");
 		return modelAndView;
 	}
+	
+
+	@RequestMapping(value="/alumno/deleteUser", method = RequestMethod.POST)
+	public ModelAndView deleteUser(@RequestParam("idChecked") List<String> idUsuario){
+		ModelAndView modelAndView = new ModelAndView();
+		if (idUsuario!=null && idUsuario.size()>0) {
+			for (String username:idUsuario)
+				usuarioService.deleteUsuario(username);
+			}
+		modelAndView.addObject("listUsers",usuarioService.getUsuarios(1L));
+		modelAndView.setViewName("admin/viewListUser");
+		return modelAndView;
+	}
+	
 	
 	
 }

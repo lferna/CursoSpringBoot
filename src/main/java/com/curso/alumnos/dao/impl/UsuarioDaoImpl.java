@@ -48,6 +48,13 @@ public class UsuarioDaoImpl extends GenericDao implements UsuarioDao {
 		this.entityManager.persist(usuarioEntity);
 		
 	}
+	
+	@Override
+	@Transactional
+	public void deleteUsuario(String username) {
+		this.entityManager.remove(this.findByUsuario(username));		
+	}	
+	
 
 	@Override
 	public List<UsuarioDto> getUsuarios(Long rol_id) {
@@ -63,6 +70,6 @@ public class UsuarioDaoImpl extends GenericDao implements UsuarioDao {
 				listUsuarioDto.add(usuarioDto);
 			}
 			return listUsuarioDto;
-		}
+	}
 
 }

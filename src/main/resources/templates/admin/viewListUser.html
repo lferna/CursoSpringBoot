@@ -6,6 +6,8 @@
 <title>Admin Page</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.css"/>
+<script type="text/javascript" src="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.js"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -13,33 +15,13 @@
 <body>
 	<div class="container">
 	
-	<img th:src="@{/images/logo.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-	<form th:action="@{/admin/menu}" method="GET">	
-		<nav class="navbar navbar-inverse bg-inverse">
-	  		<div class="container-fluid">    		
-	    	<ul class="nav navbar-nav">
-	          <li class="navbar-btn"><span style="color:white;" >Bienvenido <span th:text="${#authentication.name}"></span></span></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="home">Inicio</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListStudent">Alumnos</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListTeacher">Profesores</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListAdmin">Administradores</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewListSubject">Asignaturas</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewNewUser">Nuevo usuario</button></li>
-		      <li><button class="btn btn-link" style="color:white;" type="submit" name="action" value="viewNewSubject">Nueva asignatura</button></li>
-		      <li><form th:action="@{/logout}" method="POST">
-				 <button class="btn btn-danger">Desconectar</button>
-			  </form>
-			  </li>   
-		      
-	    	</ul>  	
-	  		</div>
-		</nav>
-	</form>
-
-		
-	<table class="table">
+	<div th:replace="admin/menu :: menu"></div>
+	
+	<form th:action="@{/alumno/deleteUser}" method="POST">	
+	<table class="table"  data-row-style="rowStyle" data-toggle="table" data-click-to-select="true">
 		  <thead class="thead-dark">
 		    <tr>
+		      <th scope="col">Seleccionar</th>
 		      <th scope="col">Usuario</th>
 		      <th scope="col">Nombre</th>
 		      <th scope="col">Apellido1</th>
@@ -49,15 +31,20 @@
 		  </thead>
 		  <tbody th:each="user : ${listUsers}">
 		    <tr>
-		      <td th:text="${user.usuario}"></td>
-		      <td th:text="${user.nombre}"></td>
-		      <td th:text="${user.apellido1}"></td>
-		      <td th:text="${user.apellido2}"></td>
-		      <td th:text="${user.email}"></td>
+		      <td><input type="checkbox" id="checkbox" th:name="idChecked" th:value="${user.usuario}"/></td>
+		      <td th:text="${user.usuario}" th:value="${user.usuario}" th:field="*{usuario}"></td>
+		      <td th:text="${user.nombre}" th:value="${user.nombre}" th:field="*{nombre}"></td>
+		      <td th:text="${user.apellido1}" th:value="${user.apellido1}" th:field="*{apellido1}"></td>
+		      <td th:text="${user.apellido2}" th:value="${user.apellido2}" th:field="*{apellido2}"></td>
+		      <td th:text="${user.email}" th:value="${user.email}" th:field="*{email}"></td>
 		    </tr>		    
 		  </tbody>
 	</table>
-
+	<div class="botonera">
+		 <button class="btn btn-success">Eliminar</button>
+	</div>
+	</form>
+	
 	</div>
 </body>
 </html>

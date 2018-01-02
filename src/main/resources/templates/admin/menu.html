@@ -1,0 +1,27 @@
+	<div class="container_menu" th:fragment="menu">
+ 			
+	<img th:src="@{/images/logo.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
+	<div class="menu">
+	<div class="menu_list">
+		<nav class="navbar-inverse bg-inverse">
+	  		<div class="container-fluid">    		
+	    	<ul class="nav navbar-nav">
+	          <li class="navbar-btn"><span style="color:white;" >Bienvenido <span th:text="${#authentication.name}"></span></span></li>
+		      <li><form th:action="@{/home}" method="GET"><button class="btn btn-link" style="color:white;" type="submit">Inicio</button></form></li>
+		      <li><form th:action="@{/alumno/viewListStudent}" method="GET"><button class="btn btn-link" style="color:white;" type="submit">Alumnos</button></form></li>
+		      <li sec:authorize="hasAnyAuthority('Admin','Profesor')"><form th:action="@{/profesor/viewListTeacher}" method="GET"><button class="btn btn-link" style="color:white;" type="submit">Profesores</button></form></li>
+		      <li sec:authorize="hasAuthority('Admin')"><form th:action="@{/admin/viewListAdmin}" method="GET"><button class="btn btn-link" style="color:white;" type="submit">Administradores</button></form></li>
+		      <li><form th:action="@{/profesor/viewListSubject}" method="GET"><button class="btn btn-link" style="color:white;" type="submit">Asignaturas</button></form></li>
+		      <li sec:authorize="hasAnyAuthority('Admin','Profesor')"><form th:action="@{/alumno/viewNewUser}" method="GET"><button class="btn btn-link" style="color:white;" type="submit">Nuevo usuario</button></form></li>
+		      <li sec:authorize="hasAnyAuthority('Admin','Profesor')"><form th:action="@{/profesor/viewNewSubject}" method="GET"><button class="btn btn-link" style="color:white;" type="submit">Nueva asignatura</button></form></li>	   
+	    	</ul>  	
+	  		</div>
+		</nav>	
+	</div>
+	<div class="logout">
+	<form th:action="@{/logout}" method="POST">
+		 <button class="btn btn-danger">Desconectar</button>
+	</form>
+	</div>
+	</div>				
+	</div>

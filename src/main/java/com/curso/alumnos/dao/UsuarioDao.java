@@ -16,4 +16,6 @@ public interface UsuarioDao{
 	void saveUsuario(UsuarioDto usuarioDto);
 	
 	List<UsuarioDto> getUsuarios(Long rol_id);
+	
+	void deleteUsuario(String username);
 }

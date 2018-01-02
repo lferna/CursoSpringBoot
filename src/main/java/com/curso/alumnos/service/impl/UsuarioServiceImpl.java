@@ -30,6 +30,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 		this.usuarioDao.saveUsuario(usuarioDto);
 	}
 	
+	public void deleteUsuario(String username){
+		this.usuarioDao.deleteUsuario(username);
+	}
+	
+	
 	public List<UsuarioDto> getUsuarios(Long rol_id){
 		return this.usuarioDao.getUsuarios(rol_id);
 	}
