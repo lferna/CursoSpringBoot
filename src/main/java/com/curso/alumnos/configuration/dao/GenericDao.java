@@ -7,7 +7,5 @@ public abstract class GenericDao {
 
 	@PersistenceContext
 	protected EntityManager entityManager;
-	
-	protected Class entityClass;
 
 }

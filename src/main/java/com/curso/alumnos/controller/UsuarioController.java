@@ -1,10 +1,14 @@
 package com.curso.alumnos.controller;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,14 +44,13 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/alumno/viewNewUser", method = RequestMethod.GET)
-	public ModelAndView viewNewUser(){
+	public ModelAndView viewNewUser() throws SQLException{
 		UsuarioDto usuarioDto = new UsuarioDto();
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewNewUser");
 		modelAndView.addObject("usuarioDto", usuarioDto);
 		modelAndView.addObject("listRoles",rolService.getRoles());
-		
 		return modelAndView;
 	}
 	
@@ -58,6 +61,14 @@ public class UsuarioController {
 		modelAndView.setViewName("admin/viewNewSubject");
 		return modelAndView;
 	}
+	
+	@ExceptionHandler(value = SQLException.class)
+	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+	        ModelAndView m = new ModelAndView("admin/viewListUser");
+	        m.addObject("exception", e.toString());
+	        m.addObject("url", req.getRequestURL());
+	        return m;
+	 }
 	
 	@RequestMapping(value="/admin/viewListAdmin", method = RequestMethod.GET)
 	public ModelAndView viewListAdmin(){
