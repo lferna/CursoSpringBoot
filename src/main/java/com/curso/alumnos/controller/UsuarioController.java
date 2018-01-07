@@ -54,14 +54,6 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	
-	@RequestMapping(value="/profesor/viewNewSubject", method = RequestMethod.GET)
-	public ModelAndView viewNewSubject(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/viewNewSubject");
-		return modelAndView;
-	}
-	
 	@ExceptionHandler(value = SQLException.class)
 	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
 	        ModelAndView m = new ModelAndView("admin/viewListUser");
@@ -96,14 +88,6 @@ public class UsuarioController {
 		modelAndView.setViewName("admin/viewListUser");
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="/profesor/viewListSubject", method = RequestMethod.GET)
-	public ModelAndView viewListSubject(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/viewListSubject");
-		return modelAndView;
-	}
-	
 
 	@RequestMapping(value="/admin/createNewUser", method = RequestMethod.POST)
 	public ModelAndView saveNewUser(@ModelAttribute UsuarioDto usuarioDto,BindingResult bindingResult){
