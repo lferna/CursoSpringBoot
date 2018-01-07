@@ -6,20 +6,20 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.curso.alumnos.dto.UsuarioDto;
 import com.curso.alumnos.service.impl.RolServiceImpl;
 import com.curso.alumnos.service.impl.UsuarioServiceImpl;
 
-@Controller
+@RestController
 public class UsuarioController {
 	
 	@Autowired
@@ -105,7 +105,7 @@ public class UsuarioController {
 	}
 	
 
-	@RequestMapping(value="/alumno/createNewUser", method = RequestMethod.POST)
+	@RequestMapping(value="/admin/createNewUser", method = RequestMethod.POST)
 	public ModelAndView saveNewUser(@ModelAttribute UsuarioDto usuarioDto,BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
 		usuarioService.saveUser(usuarioDto);
