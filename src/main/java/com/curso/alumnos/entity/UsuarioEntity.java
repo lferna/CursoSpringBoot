@@ -1,11 +1,17 @@
 package com.curso.alumnos.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,6 +45,15 @@ public class UsuarioEntity {
 	@ManyToOne
 	@JoinColumn(name="rol_id")
 	private RolEntity rol;
+	
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario_asignatura", catalog="curso", joinColumns = {
+			@JoinColumn(name = "id_usuario", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "id_asignatura",
+					nullable = false, updatable = false) })
+	private List<AsignaturaEntity> asignatura;
+	
 	
 	public Long getId() {
 		return id;
@@ -103,5 +118,15 @@ public class UsuarioEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public List<AsignaturaEntity> getAsignatura() {
+		return asignatura;
+	}
+
+	public void setAsignatura(List<AsignaturaEntity> asignatura) {
+		this.asignatura = asignatura;
+	}
+	
+	
 		
 }

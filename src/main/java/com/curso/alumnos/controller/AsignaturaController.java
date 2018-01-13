@@ -18,7 +18,6 @@ public class AsignaturaController {
 	public ModelAndView viewListSubject(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewListSubject");
-		//obtenemos los usuarios que sean del tipo estudiante
 		modelAndView.addObject("listSubjects",asignaturaService.getAsignaturas());
 		return modelAndView;
 	}

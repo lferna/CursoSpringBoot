@@ -1,10 +1,15 @@
 package com.curso.alumnos.entity;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +26,9 @@ public class AsignaturaEntity {
 
 	@Column(name = "creditos")
 	private Integer creditos;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "asignatura")
+	private List<UsuarioEntity> usuario;
 	
 	public Long getId() {
 		return id;
@@ -44,6 +52,14 @@ public class AsignaturaEntity {
 
 	public void setCreditos(Integer creditos) {
 		this.creditos = creditos;
+	}
+
+	public List<UsuarioEntity> getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(List<UsuarioEntity> usuario) {
+		this.usuario = usuario;
 	}
 	
 

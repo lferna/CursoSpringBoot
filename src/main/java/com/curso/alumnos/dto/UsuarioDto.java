@@ -1,5 +1,7 @@
 package com.curso.alumnos.dto;
 
+import java.util.List;
+
 public class UsuarioDto {
 
 	private String nombre;
@@ -15,6 +17,8 @@ public class UsuarioDto {
 	private String email;
 	
 	private RolDto rol;
+	
+	private List<AsignaturaDto> asignatura;
 	
 	public String getNombre() {
 		return nombre;
@@ -71,7 +75,14 @@ public class UsuarioDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public List<AsignaturaDto> getAsignatura() {
+		return asignatura;
+	}
+
+	public void setAsignatura(List<AsignaturaDto> asignatura) {
+		this.asignatura = asignatura;
+	}
 	
 
 }

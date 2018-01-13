@@ -7,13 +7,13 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.curso.alumnos.configuration.dao.GenericDao;
 import com.curso.alumnos.dao.UsuarioDao;
+import com.curso.alumnos.dto.AsignaturaDto;
 import com.curso.alumnos.dto.UsuarioDto;
+import com.curso.alumnos.entity.AsignaturaEntity;
 import com.curso.alumnos.entity.RolEntity;
 import com.curso.alumnos.entity.UsuarioEntity;
 
@@ -64,10 +64,17 @@ public class UsuarioDaoImpl extends GenericDao implements UsuarioDao {
 			
 			List<UsuarioEntity> listUsuarioEntity = q.getResultList();
 			List<UsuarioDto> listUsuarioDto = new ArrayList<UsuarioDto>();
+			List<AsignaturaDto> listAsignaturaDto = new ArrayList<AsignaturaDto>();
 			for (UsuarioEntity usuarioEntity : listUsuarioEntity) {
 				UsuarioDto usuarioDto = new UsuarioDto();
 				BeanUtils.copyProperties(usuarioEntity, usuarioDto);
-				listUsuarioDto.add(usuarioDto);
+				for (AsignaturaEntity asignaturaEntity : usuarioEntity.getAsignatura()) {
+					AsignaturaDto asignaturaDto = new AsignaturaDto();					
+					BeanUtils.copyProperties(asignaturaEntity, asignaturaDto);
+					listAsignaturaDto.add(asignaturaDto);
+				}
+				usuarioDto.setAsignatura(listAsignaturaDto);
+				listUsuarioDto.add(usuarioDto);				
 			}
 			return listUsuarioDto;
 	}

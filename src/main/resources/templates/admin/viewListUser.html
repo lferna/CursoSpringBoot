@@ -27,6 +27,7 @@
 		      <th scope="col">Apellido1</th>
 		      <th scope="col">Apellido2</th>
 		      <th scope="col">Email</th>
+		      <th scope="col">Asignaturas</th>
 		    </tr>
 		  </thead>
 		  <tbody th:each="user : ${listUsers}">
@@ -37,6 +38,11 @@
 		      <td th:text="${user.apellido1}" th:value="${user.apellido1}" th:field="*{apellido1}"></td>
 		      <td th:text="${user.apellido2}" th:value="${user.apellido2}" th:field="*{apellido2}"></td>
 		      <td th:text="${user.email}" th:value="${user.email}" th:field="*{email}"></td>
+		      <div th:each="asignatura : ${user.asignatura}">
+		      <div th:with="someVariable=${asignatura.nombre}">
+		      <td  th:text="${someVariable}" th:value="${someVariable}"></td>
+		      </div>
+		      </div>
 		    </tr>		    
 		  </tbody>
 	</table>
