@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.css"/>
+<script type="text/javascript" src="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+	
+	<div th:replace="admin/menu :: menu"></div>
+	
+	<form th:action="@{/admin/deleteSubject}" method="POST">	
+	<table class="table"  data-row-style="rowStyle" data-toggle="table" data-click-to-select="true">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th sec:authorize="hasAnyAuthority('Admin')" scope="col">Seleccionar</th>
+		      <th scope="col">Nombre</th>
+		      <th scope="col">Creditos</th>
+		    </tr>
+		  </thead>
+		  <tbody th:each="subject : ${listSubjects}">
+		    <tr>
+		      <td sec:authorize="hasAnyAuthority('Admin')"><input type="checkbox" id="checkbox" th:name="idChecked" th:value="${subject.nombre}"/></td>
+		      <td th:text="${subject.nombre}" th:value="${subject.nombre}" th:field="*{nombre}"></td>
+		      <td th:text="${subject.creditos}" th:value="${subject.creditos}" th:field="*{creditos}"></td>
+		    </tr>		    
+		  </tbody>
+	</table>
+	<div sec:authorize="hasAnyAuthority('Admin')" class="botonera">
+		 <button class="btn btn-success">Eliminar</button>
+	</div>
+	</form>
+	
+	</div>
+</body>
+</html>

@@ -43,7 +43,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/alumno/viewNewUser", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/viewNewUser", method = RequestMethod.GET)
 	public ModelAndView viewNewUser() throws SQLException{
 		UsuarioDto usuarioDto = new UsuarioDto();
 		
@@ -71,7 +71,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/alumno/viewListStudent", method = RequestMethod.GET)
+	@RequestMapping(value="/viewListStudent", method = RequestMethod.GET)
 	public ModelAndView viewListStudent(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewListUser");
