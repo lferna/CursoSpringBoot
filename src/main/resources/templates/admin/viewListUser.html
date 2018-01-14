@@ -21,7 +21,7 @@
 	<table class="table"  data-row-style="rowStyle" data-toggle="table" data-click-to-select="true">
 		  <thead class="thead-dark">
 		    <tr>
-		      <th scope="col">Seleccionar</th>
+		      <th sec:authorize="hasAuthority('Admin')" scope="col">Seleccionar</th>
 		      <th scope="col">Usuario</th>
 		      <th scope="col">Nombre</th>
 		      <th scope="col">Apellido1</th>
@@ -31,7 +31,7 @@
 		  </thead>
 		  <tbody th:each="user : ${listUsers}">
 		    <tr>
-		      <td><input type="checkbox" id="checkbox" th:name="idChecked" th:value="${user.usuario}"/></td>
+		      <td  sec:authorize="hasAuthority('Admin')"><input type="checkbox" id="checkbox" th:name="idChecked" th:value="${user.usuario}"/></td>
 		      <td th:text="${user.usuario}" th:value="${user.usuario}" th:field="*{usuario}"></td>
 		      <td th:text="${user.nombre}" th:value="${user.nombre}" th:field="*{nombre}"></td>
 		      <td th:text="${user.apellido1}" th:value="${user.apellido1}" th:field="*{apellido1}"></td>
@@ -40,7 +40,7 @@
 		    </tr>		    
 		  </tbody>
 	</table>
-	<div class="botonera">
+	<div sec:authorize="hasAuthority('Admin')" class="botonera">
 		 <button class="btn btn-success">Eliminar</button>
 	</div>
 	</form>

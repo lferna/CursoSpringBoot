@@ -43,7 +43,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/alumno/viewNewUser", method = RequestMethod.GET)
+	@RequestMapping(value="/profesor/viewNewUser", method = RequestMethod.GET)
 	public ModelAndView viewNewUser() throws SQLException{
 		UsuarioDto usuarioDto = new UsuarioDto();
 		
@@ -71,7 +71,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/alumno/viewListStudent", method = RequestMethod.GET)
+	@RequestMapping(value="/viewListStudent", method = RequestMethod.GET)
 	public ModelAndView viewListStudent(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/viewListUser");
@@ -80,7 +80,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/profesor/viewListTeacher", method = RequestMethod.GET)
+	@RequestMapping(value="/viewListTeacher", method = RequestMethod.GET)
 	public ModelAndView viewListTeacher(){
 		ModelAndView modelAndView = new ModelAndView();
 		//obtenemos los usuarios que sean del tipo profesor
@@ -89,7 +89,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value="/admin/createNewUser", method = RequestMethod.POST)
+	@RequestMapping(value="/profesor/createNewUser", method = RequestMethod.POST)
 	public ModelAndView saveNewUser(@ModelAttribute UsuarioDto usuarioDto,BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
 		usuarioService.saveUser(usuarioDto);

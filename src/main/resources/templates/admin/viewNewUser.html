@@ -16,7 +16,7 @@
 	<div th:replace="admin/menu :: menu"></div>
 
 		<!-- Formulario de alta -->
-		<form th:action="@{/admin/createNewUser}" th:object="${usuarioDto}" method="POST">
+		<form th:action="@{/profesor/createNewUser}" th:object="${usuarioDto}" method="POST">
 		  <div class="form-group-usuario">
 		    <label for="usuario">Usuario</label>
 		    <input type="text" class="form-control" th:field="*{usuario}" placeholder="Introduzca el usuario"/>
