@@ -7,3 +7,6 @@ Este curso está preparado para aprender a montar una aplicación con Spring Boo
 - Bootstrap + Thymleaf
 - MariaDB (MySQL en su defecto)
 - Maven
+
+Presentación:
+https://docs.google.com/presentation/d/1JybcvIRWfzV0kAlmLgwvtu-QC0OeVcEzDIVBsMU0SyY/edit?usp=sharing
