@@ -7,12 +7,11 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.curso.alumnos.configuration.dao.GenericDao;
 import com.curso.alumnos.dao.UsuarioDao;
+import com.curso.alumnos.dto.RolDto;
 import com.curso.alumnos.dto.UsuarioDto;
 import com.curso.alumnos.entity.RolEntity;
 import com.curso.alumnos.entity.UsuarioEntity;
@@ -27,14 +26,19 @@ public class UsuarioDaoImpl extends GenericDao implements UsuarioDao {
 	}
 
 	@Override
-	public UsuarioEntity findByUsuario(String username) {
+	public UsuarioDto findByUsuario(String username) {
 		
 		Query q = entityManager.createQuery(
 				"FROM UsuarioEntity e WHERE usuario = :username");
 			q.setParameter("username", username);
 			UsuarioEntity usuarioEntity = (UsuarioEntity)q.getSingleResult();
-
-		return usuarioEntity;
+		UsuarioDto usuarioDto = new UsuarioDto();
+		RolDto rolDto = new RolDto();
+		BeanUtils.copyProperties(usuarioEntity, usuarioDto);
+		BeanUtils.copyProperties(usuarioEntity.getRol(), rolDto);
+		usuarioDto.setRol(rolDto);
+		
+		return usuarioDto;
 	}
 
 	@Override

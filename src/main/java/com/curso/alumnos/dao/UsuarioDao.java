@@ -11,7 +11,7 @@ public interface UsuarioDao{
 	
 	UsuarioEntity findByNombre(String nombre);
 	
-	UsuarioEntity findByUsuario(String username);
+	UsuarioDto findByUsuario(String username);
 	
 	void saveUsuario(UsuarioDto usuarioDto);
 	

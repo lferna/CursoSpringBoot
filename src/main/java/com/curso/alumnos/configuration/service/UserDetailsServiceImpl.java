@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.curso.alumnos.dao.UsuarioDao;
-import com.curso.alumnos.entity.UsuarioEntity;
+import com.curso.alumnos.dto.UsuarioDto;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
@@ -24,11 +24,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		 UsuarioEntity usuarioEntity = usuarioDao.findByUsuario(username);
+		 UsuarioDto usuarioDto = usuarioDao.findByUsuario(username);
 		 Set<GrantedAuthority> grantedAuthorities = new HashSet();
-		 grantedAuthorities.add(new SimpleGrantedAuthority(usuarioEntity.getRol().getNombre()));
+		 grantedAuthorities.add(new SimpleGrantedAuthority(usuarioDto.getRol().getNombre()));
 		 
-		User user = new User(usuarioEntity.getUsuario(),usuarioEntity.getPassword(), grantedAuthorities);
+		User user = new User(usuarioDto.getUsuario(),usuarioDto.getPassword(), grantedAuthorities);
 		return user;
 	}
 
