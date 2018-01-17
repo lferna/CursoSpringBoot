@@ -9,4 +9,4 @@ Este curso está preparado para aprender a montar una aplicación con Spring Boo
 - Maven
 
 Presentación:
-https://docs.google.com/presentation/d/1JybcvIRWfzV0kAlmLgwvtu-QC0OeVcEzDIVBsMU0SyY/edit?usp=sharing
+https://docs.google.com/presentation/d/1WQwyiBSJK3l6IrkXlGdqeLar2WD9jQveUSVYYWQzVjI/edit?usp=sharing
