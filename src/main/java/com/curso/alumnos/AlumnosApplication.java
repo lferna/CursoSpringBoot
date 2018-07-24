@@ -9,6 +9,6 @@ public class AlumnosApplication {
 	public static void main(String[] args) {
 		//inicio test
 		SpringApplication.run(AlumnosApplication.class, args);
-		//fin
+		//fin test
 	}
 }
