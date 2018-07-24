@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AlumnosApplication {
 
 	public static void main(String[] args) {
-		//inicio - test
+		//inicio
 		SpringApplication.run(AlumnosApplication.class, args);
 	}
 }
