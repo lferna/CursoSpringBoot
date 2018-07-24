@@ -3,7 +3,7 @@ node {
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       // **       in the global configuration.     
-      git 'https://github.com/lferna/CursoSpringBoot.git'
+      git $GIT_URL
       mvnHome = tool 'Maven3'
    }
    stage('Build') {
