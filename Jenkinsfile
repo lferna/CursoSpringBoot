@@ -1,17 +1,24 @@
-pipeline { 
-    agent any  
-    stages { 
-       stage('Preparation') { // for display purposes        
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }       
-       }
-       stage('Build') {
-          // Run the maven build          
-             sh "'${mvnHome}/bin/mvn' -DskipTests clean package"
-           }
-    }
+#!groovy
+
+node {
+   // ------------------------------------
+   // -- ETAPA: Compilar
+   // ------------------------------------
+   stage 'Compilar'
+   
+   // -- Configura variables
+   echo 'Configurando variables'
+   def mvnHome = tool 'M3'
+   env.PATH = "${mvnHome}/bin:${env.PATH}"
+   echo "var mvnHome='${mvnHome}'"
+   echo "var env.PATH='${env.PATH}'"
+   
+   // -- Descarga código desde SCM
+   echo 'Descargando código de SCM'
+   sh 'rm -rf *'
+   checkout scm
+   
+   // -- Compilando
+   echo 'Compilando aplicación'
+   sh 'mvn clean compile'
 }
