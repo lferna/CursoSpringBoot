@@ -1,24 +1,11 @@
-#!groovy
-
 node {
-   // ------------------------------------
-   // -- ETAPA: Compilar
-   // ------------------------------------
-   stage 'Compilar'
-   
-   // -- Configura variables
-   echo 'Configurando variables'
-   def mvnHome = tool 'Maven3'
-   env.PATH = "${mvnHome}/bin:${env.PATH}"
-   echo "var mvnHome='${mvnHome}'"
-   echo "var env.PATH='${env.PATH}'"
-   
-   // -- Descarga código desde SCM
-   echo 'Descargando código de SCM'
-   sh 'rm -rf *'
-   checkout scm
-   
-   // -- Compilando
-   echo 'Compilando aplicación'
-   sh 'mvn clean compile'
+   def mvnHome
+   stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      // **       in the global configuration.           
+      mvnHome = tool 'Maven3'
+   }
+   stage('Build') {
+         sh "'${mvnHome}/bin/mvn' -DskipTests clean package"      
+   }
 }
