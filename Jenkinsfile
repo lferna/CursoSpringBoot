@@ -6,6 +6,6 @@ node {
       mvnHome = tool 'Maven3'
    }
    stage('Build') {
-         sh "'${mvnHome}/bin/mvn' -DskipTests clean package"      
+         sh "'${mvnHome}/bin/mvn' -DskipTests clean package -X"       
    }
 }
