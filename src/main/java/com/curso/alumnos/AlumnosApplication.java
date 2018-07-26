@@ -8,7 +8,7 @@ public class AlumnosApplication {
 
 	public static void main(String[] args) {
 		//inicio test
-		SpringApplication.run(AlumnosApplication.class, args);
+		SpringApplication.run2(AlumnosApplication.class, args);
 		//fin test proba ndo
 	}
 }
