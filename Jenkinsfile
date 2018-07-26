@@ -18,7 +18,7 @@ def config = [:]
 
 config = [
     gitCredentials: '61c9ce98-3487-4525-abcd-430715481a9d',
-        mavenVersion: 'MAVEN_3.5.0',
+        mavenVersion: 'M3',
         mavenProfile: true,
         app: "webproveedores"        
 ]
